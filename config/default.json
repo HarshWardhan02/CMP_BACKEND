@@ -1,0 +1,19 @@
+{
+  "port": 3000,
+
+  "db": "mongodb://localhost:27017",
+  "aws": {
+    "accessKeyId": "",
+    "secretAccessKey": "",
+    "region": "us-east-1"
+  },
+  "jwtSecret": "your_jwt_secret",
+  "apiKey": "your_api_key",
+  "logLevel": "debug",
+  "logFile": "/tmp/cmpbackend_error.log",
+  "logType": "rotating-file",
+  "logRotation": "1d",
+  "logCopies": 5,
+  "fileSize": 80,
+  "databaseName": "cmp_backend"
+}
