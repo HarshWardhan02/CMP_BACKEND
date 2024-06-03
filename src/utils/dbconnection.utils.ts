@@ -4,7 +4,6 @@ import { logger } from "./log.utils";
 export const connectDatabase = () => {
   logger.info("Trying to connect to localdb");
   const databaseUrl = config.get("db") + "/" + config.get("databaseName");
-  console.log(databaseUrl, "auro singh pagalllllll");
   logger.info("Database:", databaseUrl);
   mongoose
     .connect(databaseUrl)

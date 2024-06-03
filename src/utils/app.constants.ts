@@ -1,7 +1,7 @@
 export class AppConstants {
   static MESSAGE = {
     SUCCESS: {
-      CODE: "ER0000",
+      CODE: "SUCCESS0000",
       MSG: "success",
     },
     BAD_REQUEST: {
