@@ -1,9 +1,12 @@
 import express from "express";
-import * as DbConnectUtil from './utils/dbconnection.utils';
+import * as DbConnectUtil from "./utils/dbconnection.utils";
 import { logger } from "./utils/log.utils";
-import bodyParser from 'body-parser';
-import  User from '../src/models/user.model';
-import dotenv from 'dotenv';
+import bodyParser from "body-parser";
+import { indexRouter } from "../src/routes/index.router";
+import * as StartupService from "../src/services/startup.service";
+import { ResposeDTO } from "../src/interfaces/common.interface";
+import dotenv from "dotenv";
+import { AppConstants } from "./utils/app.constants";
 
 dotenv.config();
 
@@ -20,29 +23,18 @@ app.get("/", (req, res) => {
   res.send("Hello, TypeScript with Express!");
 });
 
-// Signup route without password hashing
-app.post('/signup',async (req, res) => {
-  const { name, email, password } = req.body;
+app.use("/api/v1", indexRouter);
 
-  try {
-    // Check if the user already exists
-    // const existingUser =  User.findOne({ email });
-    // if (existingUser) {
-    //   return res.status(400).json({ message: 'User already exists' });
-    // }
+app.get("/startup", async (req, res) => {
+  logger.info("Welcome to startup api");
+  console.log("welcome to startup application");
+  await StartupService.createAdminUser();
 
-    // Create a new user
-    const newUser = new User({
-      name,
-      email,
-      password, // No password hashing
-    });
-
-    await newUser.save();
-    res.status(201).json({ message: 'User created successfully' });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error });
-  }
+  const resposeDto: ResposeDTO = {
+    resposeCode: AppConstants.MESSAGE.SUCCESS.CODE,
+    resposeMessage: AppConstants.MESSAGE.SUCCESS.MSG,
+  };
+  res.json(resposeDto);
 });
 
 DbConnectUtil.connectDatabase();
