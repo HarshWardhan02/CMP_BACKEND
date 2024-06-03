@@ -11,9 +11,11 @@ import { AppConstants } from "./utils/app.constants";
 dotenv.config();
 
 const app = express();
+var cors = require('cors')
 const port = process.env.PORT;
 
 app.use(bodyParser.json());
+app.use(cors());
 app.use(
   bodyParser.urlencoded({
     extended: true,
