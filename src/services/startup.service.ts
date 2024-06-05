@@ -13,8 +13,8 @@ export const createAdminUser = async (): Promise<ResposeDTO> => {
         displayID: 'UR-2023-0001',
         firstName: 'Harsh',
         lastName: 'Pratap',
-        username: 'harsh@yopmail.com',
-        password: '12345678aA'
+        username: 'harsh12',
+        password: '12345678A'
     };
 
     const userModel: UserDocument | null = await UserModel.findOne({ username: user.username });

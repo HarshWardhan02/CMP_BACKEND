@@ -23,4 +23,19 @@ export function validateUser(user: any) {
   return schema.validate(user);
 }
 
+export function validateLoginForm(user: any) {
+  const schema = Joi.object({
+    password: Joi.string()
+      .min(8)
+      .required()
+      .label("password field is missing:"),
+    userName: Joi.string()
+      .max(100)
+      .required()
+      .label("userName field is missing:"),
+    rememberMe: Joi.boolean().label("rememberMe field is missing:"),
+  });
+  return schema.validate(user);
+}
+
 export default validateUser;

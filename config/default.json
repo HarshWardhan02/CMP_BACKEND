@@ -15,5 +15,7 @@
   "logRotation": "1d",
   "logCopies": 5,
   "fileSize": 80,
-  "databaseName": "cmp_backend"
+  "databaseName": "cmp_backend",
+  "access_token_secrete_key": "1234567KKKKgg",
+  "refresh_token_secrete_key": "1234567KKKKgg"
 }

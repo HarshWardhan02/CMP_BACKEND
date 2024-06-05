@@ -56,7 +56,6 @@ userSchema.methods.generateJWTAcessToken = function (
   this: UserDocument,
   clientID: string
 ) {
-  const activeDirectoryDomain: string = config.get("activeDirectoryDomain");
   const expiresInMunites = 60;
   let payload = {
     clientID: clientID,

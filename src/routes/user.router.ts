@@ -9,3 +9,6 @@ userRouter.route("/registerUser").post(
   // [passport.authenticate("jwt", { session: false })],
   UserController.registerUser
 );
+
+userRouter.route("/login").post(UserController.login);
+userRouter.route("/refreshToken").get(UserController.refreshToken);

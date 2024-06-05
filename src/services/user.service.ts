@@ -10,6 +10,7 @@ import bcrypt from "bcryptjs";
 import { UserRequest } from "../interfaces/user.interface";
 import { error, log } from "console";
 import https from "https";
+import LoginInfo from "../models/login-info.models";
 
 export const registerUser = async (
   userReq: UserRequest
@@ -54,4 +55,49 @@ export const registerUser = async (
     );
   }
   return resposeDto;
+};
+
+export const getUserByUserName = async (
+  userName: String
+): Promise<UserDocument | null> => {
+  try {
+    const user: UserDocument | null = await User.findOne({
+      username: userName,
+    });
+    if (user) {
+      return user;
+    } else {
+      return null;
+    }
+  } catch (ex: any) {
+    logger.error("Error in registerUser", ex);
+    console.error(ex);
+    return null;
+  }
+};
+
+export const recordLogin = async (
+  clientID: string,
+  userID: string,
+  refreshToken: string,
+  rememberMe: boolean
+): Promise<boolean> => {
+  try {
+    const loginInfo = new LoginInfo({
+      clientID: clientID,
+      userID: userID,
+      refreshToken: refreshToken,
+      rememberMe: rememberMe,
+      loginTime: CommonUtil.getUTCTimeStamp(),
+      logoutTime: 0,
+    });
+    await loginInfo.save();
+    return true;
+  } catch (ex: any) {
+    logger.error("Error in recordLogin", ex);
+    throw new DatabaseException(
+      AppConstants.MESSAGE.INTERNAL_SERVER_ERROR.MSG,
+      ex
+    );
+  }
 };
