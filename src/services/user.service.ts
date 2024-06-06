@@ -101,3 +101,17 @@ export const recordLogin = async (
     );
   }
 };
+
+export const recordLogout = async (clientID: string): Promise<boolean> => {
+  try {
+    const update = { logoutTime: CommonUtil.getUTCTimeStamp() };
+    await LoginInfo.findOneAndUpdate({ clientID: clientID }, update);
+    return true;
+  } catch (ex: any) {
+    logger.error("Error in recordLogout", ex);
+    throw new DatabaseException(
+      AppConstants.MESSAGE.INTERNAL_SERVER_ERROR.MSG,
+      ex
+    );
+  }
+};

@@ -45,7 +45,7 @@ export class AppConstants {
   static READABLE_ID = {
     USER: {
       ID: "User",
-      PREFIX: "UR"
-    }
-};
+      PREFIX: "UR",
+    },
+  };
 }

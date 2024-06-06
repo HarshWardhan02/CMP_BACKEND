@@ -43,8 +43,6 @@ export const login = async (req: Request, res: Response) => {
   const startTime = new Date();
   logger.info("START TAG :---LOGIN START");
   try {
-    console.log("eeeeee", req.body);
-
     // const { error } = validateLoginForm(req.body);
     // if (error) {
     //   return res.status(StatusCodes.BAD_REQUEST).json({
@@ -174,5 +172,22 @@ export const refreshToken = async (req: Request, res: Response) => {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(resposeDto);
   } finally {
     logger.info("END TAG :---REFRESH END");
+  }
+};
+
+export const logout = async (req: any, res: Response) => {
+  try {
+    const clientID = req["clientID"];
+    await UserService.recordLogout(clientID);
+    return res.status(StatusCodes.OK).json({
+      responseCode: AppConstants.MESSAGE.SUCCESS.CODE,
+      responseMessage: AppConstants.MESSAGE.SUCCESS.MSG,
+    });
+  } catch (ex: any) {
+    const resposeDto: ResposeDTO = {
+      resposeCode: AppConstants.MESSAGE.INTERNAL_SERVER_ERROR.CODE,
+      resposeMessage: ex.message,
+    };
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(resposeDto);
   }
 };

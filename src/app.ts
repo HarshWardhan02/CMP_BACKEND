@@ -7,6 +7,9 @@ import * as StartupService from "../src/services/startup.service";
 import { ResposeDTO } from "../src/interfaces/common.interface";
 import dotenv from "dotenv";
 import { AppConstants } from "./utils/app.constants";
+import passport from 'passport';
+import * as middle from './middlewares/passport.middleware';
+
 
 dotenv.config();
 
@@ -21,6 +24,10 @@ app.use(
     extended: true,
   })
 );
+
+passport.use(middle.strategy);
+app.use(passport.initialize());
+
 app.get("/", (req, res) => {
   res.send("Hello, TypeScript with Express!");
 });
