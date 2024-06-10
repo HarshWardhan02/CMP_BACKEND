@@ -7,14 +7,13 @@ import * as StartupService from "../src/services/startup.service";
 import { ResposeDTO } from "../src/interfaces/common.interface";
 import dotenv from "dotenv";
 import { AppConstants } from "./utils/app.constants";
-import passport from 'passport';
-import * as middle from './middlewares/passport.middleware';
-
+import passport from "passport";
+import * as middle from "./middlewares/passport.middleware";
 
 dotenv.config();
 
 const app = express();
-var cors = require('cors')
+var cors = require("cors");
 const port = process.env.PORT;
 
 app.use(bodyParser.json());
